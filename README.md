@@ -1,8 +1,8 @@
-Introduction to Javascript by testing
-=====================================
+Introduction to AngularJS & Redux by testing
+============================================
 
-A small course introducing Javascript that uses test
-to introduce and teach concepts.
+A small course introducing AngularJS and Redux 
+that uses test to introduce and teach concepts.
 
 
 Setup

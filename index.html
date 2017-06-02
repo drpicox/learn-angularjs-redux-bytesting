@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Javascript for Java programmers by Test</title>
+  <title>Learn AngularJS + Redux by testing</title>
 
   <link rel="stylesheet" href="lib/jasmine-2.6.2/jasmine.css">
 
@@ -11,24 +11,36 @@
   <script src="lib/custom-reporter.js"></script>
   <script src="lib/jasmine-2.6.2/boot.js"></script>
 
+  <script src="lib/angularjs/angular.js"></script>
+  <script src="lib/angularjs/angular-mocks.js"></script>
+  <script src="lib/drpicox-angularjs-redux.js"></script>
+  
+  <script src="helpers/testbed.js"></script>
+  <script src="helpers/matchers.js"></script>
+
+  <script src="lib/redux/redux.js"></script>
+  <script src="lib/redux/reselect.js"></script>
 
 
   <!-- include source files here -->
-
+  <script src="src/Zoo.js"></script>
+  <script src="src/ZooController.js"></script>
 
   <!-- include spec files here -->
   <script src="spec/0.Introduction.js"></script>
-  <script src="spec/1.Numbers.js"></script>
-  <script src="spec/2.Strings.js"></script>
-  <script src="spec/3.Booleans.js"></script>
-  <script src="spec/4.Arrays.js"></script>
-  <script src="spec/5.Objects.js"></script>
-  <script src="spec/6.Functions.js"></script>
-  <script src="spec/7.Classes.js"></script>
+  <script src="spec/1.Templates.js"></script>
+  <script src="spec/2.Controllers.js"></script>
+  <script src="spec/3.Directives.js"></script>
+  <script src="spec/4.Components.js"></script>
+  <script src="spec/5.Injections.js"></script>
+  <script src="spec/6.Modules.js"></script>
+  <script src="spec/7.Redux.js"></script>
+  <script src="spec/8.Selectors.js"></script>
 
 </head>
 
 <body>
+  <div id="app"></div>
 <script>
   document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
   ':35729/livereload.js?snipver=1"></' + 'script>')
