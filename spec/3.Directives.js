@@ -6,7 +6,7 @@ describe("Directives", () => {
 				.compile(`<div ng-if="$ctrl.hasSavio()">Savio is here</div>`)
 				.withController(ZooController);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio is here").toBeTextOf(wrapper);
 		});
 
 		it("shows its content only if the condition evaluates true", () => {
@@ -14,7 +14,7 @@ describe("Directives", () => {
 				.compile(`Savio is <span ng-if="!$ctrl.hasSavio()">not </span>here`)
 				.withController(ZooController);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio is here").toBeTextOf(wrapper);
 		});
 
 		it("reevaluates the condition when there are changes", () => {
@@ -23,7 +23,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.$ctrl.removeSavio();
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio is not here").toBeTextOf(wrapper);
 		});
 	});
 
@@ -33,7 +33,7 @@ describe("Directives", () => {
 				.compile(`<div ng-repeat="animal in $ctrl.getAnimals()">{{ animal }}</div>`)
 				.withController(ZooController);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("lulubarrysavio").toBeTextOf(wrapper);
 		});
 		it('observes changes', () => {
 			const wrapper = testbed
@@ -41,7 +41,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.$ctrl.removeSavio();
-			expect(solveme).toBeTextOf(wrapper);
+			expect("lulubarry").toBeTextOf(wrapper);
 		});
 		it('accepts more directives/components inside', () => {
 			const wrapper = testbed
@@ -50,7 +50,7 @@ describe("Directives", () => {
 					  <div ng-if="animal.length < 5">{{animal}}</div>
 					</div>
 				`).withController(ZooController);
-			expect(solveme).toBeTextOf(wrapper);
+			expect("lulu").toBeTextOf(wrapper);
 		});
 	});
 
@@ -62,9 +62,9 @@ describe("Directives", () => {
 					<button ng-click="$ctrl.removeSavio()"></button>
 				`).withController(ZooController);
 				
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio is here").toBeTextOf(wrapper);
 			wrapper.click('button');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio is not here").toBeTextOf(wrapper);
 		});
 	});
 
@@ -74,7 +74,7 @@ describe("Directives", () => {
 				.compile('<input ng-model="$ctrl.newName">')
 				.withController(ZooController);
 
-			expect(solveme).toBeValueOf(wrapper.find('input'));
+			expect("Hoboken").toBeValueOf(wrapper.find('input'));
 		});
 		it('if model value changes, input value is updated', () => {
 			const wrapper = testbed
@@ -82,7 +82,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.$ctrl.newName = 'Central Park Zoo';
-			expect(solveme).toBeValueOf(wrapper.find('input'));
+			expect("Central Park Zoo").toBeValueOf(wrapper.find('input'));
 		});
 		it('if user changes input value, controller value is updated', () => {
 			const wrapper = testbed
@@ -90,7 +90,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.find('input').val('Bcn Zoo');
-			expect(solveme).toBe(wrapper.$ctrl.newName);
+			expect("Bcn Zoo").toBe(wrapper.$ctrl.newName);
 		});
 		it('also updates all interpolations', () => {
 			const wrapper = testbed
@@ -98,7 +98,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.find('input').val('Bcn Zoo');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Bcn Zoo").toBeTextOf(wrapper);
 		});
 	});
 
@@ -109,7 +109,7 @@ describe("Directives", () => {
 				.withController(ZooController);
 
 			wrapper.find('input').val('Bcn Zoo');
-			expect(solveme).toBe(wrapper.$ctrl.getName());
+			expect("Bcn Zoo").toBe(wrapper.$ctrl.getName());
 		});
 	});
 
