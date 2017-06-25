@@ -19,7 +19,7 @@ describe("Redux", () => {
 				.use('com.drpicox.angularjs-redux')
 				.getState();
 
-			expect(solveme).toEqual(state);
+			expect({}).toEqual(state);
 		});
 
 		it('store can be injected', () => {
@@ -39,7 +39,7 @@ describe("Redux", () => {
 			const wrapper = testbed.use('jsonStateApp')
 				.compile('<json-state></json-state>');
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("{}").toBeTextOf(wrapper);
 		});
 
 	});
@@ -55,7 +55,7 @@ describe("Redux", () => {
 				});
 
 			const state = testbed.use('constantThreeApp').getState();
-			expect(solveme).toEqual(state);
+			expect({constantThree: 3}).toEqual(state);
 		});
 
 		it('you can configure multiple reducers', () => {
@@ -84,7 +84,7 @@ describe("Redux", () => {
 			]);
 
 			const state = testbed.use('zooApp.reducers').getState();
-			expect(solveme).toEqual(state);
+			expect({name: "Hoboken",animals: []}).toEqual(state);
 		});
 
 		it('reducers can respond to dispatched actions', () => {
@@ -106,7 +106,7 @@ describe("Redux", () => {
 				.dispatch({type: 'INCREMENT'})
 				.getState();
 
-			expect(solveme).toEqual(state);		
+			expect({count: 1}).toEqual(state);		
 		});
 
 		it('reducers never modify the state', () => {
@@ -128,7 +128,7 @@ describe("Redux", () => {
 				.dispatch({type: 'ADD_ANIMAL', animal: 'savio'})
 				.getState();
 
-			expect(solveme).toEqual(state);		
+			expect({animals: ["savio"]}).toEqual(state);		
 		});
 
 		it('reducers can use auxiliary reducers', () => {
@@ -175,7 +175,7 @@ describe("Redux", () => {
 				.dispatch({type: 'BREAK_ANIMAL_OUT', name: 'savio'})
 				.getState();
 
-			expect(solveme).toEqual(state);		
+			expect({animals: [{name: "savio",present: false}, {name: "lulu",present: true}]}).toEqual(state);		
 		});
 	});
 
@@ -192,7 +192,7 @@ describe("Redux", () => {
 			const dispatcher = testbed.use('counterApp').getService('dispatcher');
 
 			dispatcher.increment();
-			expect(solveme).toEqual(testbed.getLastDispatchedAction());
+			expect({type: "INCREMENT"}).toEqual(testbed.getLastDispatchedAction());
 		});
 
 		it('action constructor for dispatch can have parameters', () => {
@@ -209,7 +209,7 @@ describe("Redux", () => {
 			const dispatcher = testbed.use('counterApp').getService('dispatcher');
 
 			dispatcher.addAnimal('savio');
-			expect(solveme).toEqual(testbed.getLastDispatchedAction());
+			expect({type: 'ADD_ANIMAL',name: "savio"}).toEqual(testbed.getLastDispatchedAction());
 		});
 
 		it('dispatched actions triggers reducers', () => {
@@ -244,7 +244,7 @@ describe("Redux", () => {
 			const dispatcher = testbed.use('counterApp').getService('dispatcher');
 
 			dispatcher.increment();
-			expect(solveme).toEqual(testbed.getState())
+			expect({count: 1}).toEqual(testbed.getState())
 		});
 
 		it('dispatcher can be injected and used into controllers', () => {
@@ -279,7 +279,7 @@ describe("Redux", () => {
 				.compile('<incrementer></incrementer>');
 
 			wrapper.click('button');
-			expect(solveme).toEqual(testbed.getLastDispatchedAction());
+			expect({type: "INCREMENT"}).toEqual(testbed.getLastDispatchedAction());
 		});
 	});
 

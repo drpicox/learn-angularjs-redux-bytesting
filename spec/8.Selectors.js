@@ -114,7 +114,7 @@ describe("Selectors", () => {
 			]);
 
 		const selector = testbed.use('zooApp').getService('selector');
-		expect(solveme).toEqual(selector.getState());
+		expect({name: "Hoboken",animals: [{name: "savio",present: true}]}).toEqual(selector.getState());
 	});
 
 	it('a selector can be configured to get a simple partial retrieval', () => {
@@ -136,7 +136,7 @@ describe("Selectors", () => {
 			]);
 
 		const selector = testbed.use('zooApp').getService('selector');
-		expect(solveme).toEqual(selector.getName());
+		expect("Hoboken").toEqual(selector.getName());
 	});
 
 	it('a selector can return computed data', () => {
@@ -158,7 +158,7 @@ describe("Selectors", () => {
 			]);
 
 		const selector = testbed.use('zooApp').getService('selector');
-		expect(solveme).toEqual(selector.getAnimalNames());
+		expect(["savio"]).toEqual(selector.getAnimalNames());
 	});
 
 	it('a selector are injected of other getter selectors results as inputs', () => {
@@ -197,7 +197,7 @@ describe("Selectors", () => {
 			]);
 
 		const selector = testbed.use('zooApp').getService('selector');
-		expect(solveme).toEqual(selector.getPresentAnimalNames());
+		expect(["savio"]).toEqual(selector.getPresentAnimalNames());
 	});
 
 	it('a selectors react to state changes', () => {
@@ -239,13 +239,13 @@ describe("Selectors", () => {
 		const selector = testbed.getService('selector');
 		const dispatcher = testbed.getService('dispatcher');
 
-		expect(solveme).toEqual(selector.getPresentAnimalNames());
+		expect(["savio"]).toEqual(selector.getPresentAnimalNames());
 
 		dispatcher.addAnimal('lulu');
-		expect(solveme).toEqual(selector.getPresentAnimalNames());
+		expect(["savio", "lulu"]).toEqual(selector.getPresentAnimalNames());
 
 		dispatcher.breakAnimalOut('savio');
-		expect(solveme).toEqual(selector.getPresentAnimalNames());
+		expect(["lulu"]).toEqual(selector.getPresentAnimalNames());
 	});
 
 
