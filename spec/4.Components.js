@@ -6,14 +6,14 @@ describe("Components", () => {
 				template: `{{$ctrl.newName}}`,
 				controller: ZooController,
 			});
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Hoboken").toBeTextOf(wrapper);
 		});
 
 		it('may have no controller, then it has a default empty controller', () => {
 			const wrapper = testbed.mount({
 				template: `I have {{"an empty"}} controller`,
 			});
-			expect(solveme).toBeTextOf(wrapper);
+			expect("I have an empty controller").toBeTextOf(wrapper);
 		});
 
 		it('has inputs', () => {
@@ -24,7 +24,7 @@ describe("Components", () => {
 				},
 			});
 			wrapper.setInput('anInput', 'Savio likes Mort');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Savio likes Mort").toBeTextOf(wrapper);
 		});
 
 		it('has outputs', () => {
@@ -37,7 +37,7 @@ describe("Components", () => {
 			let itEscapesTo;
 			wrapper.onOutput('onSavioEscape', (reason) => { itEscapesTo = reason; });
 			wrapper.click('button');
-			expect(solveme).toBe(itEscapesTo);
+			expect("to eat Mort").toBe(itEscapesTo);
 		});
 	});
 
@@ -52,7 +52,7 @@ describe("Components", () => {
 				.component('demo', demoComponent)
 				.compile(`<demo></demo>`);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect(`I am a demo component`).toBeTextOf(wrapper);
 		});
 
 		it('the name is converted from camelCase to slug-case', () => {
@@ -60,7 +60,7 @@ describe("Components", () => {
 				.component('myDemo', demoComponent)
 				.compile(`<my-demo></my-demo>`);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect(`I am a demo component`).toBeTextOf(wrapper);
 		});
 
 		const helloComponent = {
@@ -78,7 +78,7 @@ describe("Components", () => {
 				.component('hello', helloComponent)
 				.compile(`<hello name="'Alice'"></hello>`);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Hello Alice").toBeTextOf(wrapper);
 		});
 
 		it('inputs attribute names follows slug-case', () => {
@@ -86,7 +86,7 @@ describe("Components", () => {
 				.component('hello', helloComponent)
 				.compile(`<hello name="'Officer'" last-name="'X'"></hello>`);
 
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Hello Officer X").toBeTextOf(wrapper);
 		});
 
 		const tallyCounterComponent = {
@@ -113,11 +113,11 @@ describe("Components", () => {
 
 			// State before click
 			wrapper.set('count', 0);
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Count:0").toBeTextOf(wrapper);
 
 			// State after click
 			wrapper.click('button');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Count:1").toBeTextOf(wrapper);
 		});
 
 		const editNameComponent = {
@@ -145,11 +145,11 @@ describe("Components", () => {
 
 			// Before any input change
 			wrapper.set('name', 'savio');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Name: savio").toBeTextOf(wrapper);
 
 			// After user changes the input
 			wrapper.find('input').val('rhonda');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Name: rhonda").toBeTextOf(wrapper);
 		});
 
 	});
@@ -191,7 +191,7 @@ describe("Components", () => {
 				`);
 
 			wrapper.find('input').val('savio');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Hello savio").toBeTextOf(wrapper);
 		});
 
 		it('parent component can invoke and coordine children components', () => {
@@ -217,7 +217,7 @@ describe("Components", () => {
 				.compile(`<zoo-name-editor></zoo-name-editor>`);
 
 			wrapper.find('input').val('Hoboken');
-			expect(solveme).toBeTextOf(wrapper);
+			expect("Hello Hoboken").toBeTextOf(wrapper);
 		});
 	});
 });
