@@ -17,7 +17,7 @@ describe("Injections", () => {
 			.service('zooService', ZooService)
 			.getService('zooService');
 
-		expect(solveme).toBeInstanceOf(ZooService);
+		expect(zooService).toBeInstanceOf(ZooService);
 	});
 
 	class SavioGuardService {
@@ -36,7 +36,7 @@ describe("Injections", () => {
 			.service('savioGuardService', SavioGuardService)
 			.getService('savioGuardService');
 
-		expect(solveme).toBe(savioGuardService.isSavioHere());
+		expect(true).toBe(savioGuardService.isSavioHere());
 	});
 
 	class SavioEscapeService {
@@ -58,11 +58,11 @@ describe("Injections", () => {
 		const savioEscapeService = testbed.getService('savioEscapeService');
 
 		// initially it is in the zoo instance (as expect(solveme)
-		expect(solveme).toBe(savioGuardService.isSavioHere());
+		expect(true).toBe(savioGuardService.isSavioHere());
 
 		// but... it escapes from the zoo instance using another service
 		savioEscapeService.breakSavioOut();
-		expect(solveme).toBe(savioGuardService.isSavioHere());
+		expect(false).toBe(savioGuardService.isSavioHere());
 	});
 
 	let schrodingerCatObserved;
@@ -77,11 +77,11 @@ describe("Injections", () => {
 		testbed.service('schrodingerCatService', SchrodingerCatService);
 
 		// no one is using it
-		expect(solveme).toBe(schrodingerCatObserved);
+		expect(false).toBe(schrodingerCatObserved);
 
 		// now we will use it
 		const schrodingerCatService = testbed.getService('schrodingerCatService');
-		expect(solveme).toBe(schrodingerCatObserved);
+		expect(true).toBe(schrodingerCatObserved);
 	});
 
 	it('does not creates services until they are requested including other services', () => {
@@ -94,11 +94,11 @@ describe("Injections", () => {
 			});
 
 		// no one is using it
-		expect(solveme).toBe(schrodingerCatObserved);
+		expect(false).toBe(schrodingerCatObserved);
 
 		// now we will use it
 		const boxExperimentService = testbed.getService('boxExperimentService');
-		expect(solveme).toBe(schrodingerCatObserved);
+		expect(true).toBe(schrodingerCatObserved);
 	});
 
 	const savioGuardComponent = {
@@ -124,7 +124,7 @@ describe("Injections", () => {
 			.component('savioGuard', savioGuardComponent)
 			.compile(`<savio-guard></savio-guard>`);
 
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 	});
 
 	it('component observes changes in services', () => {
@@ -138,11 +138,11 @@ describe("Injections", () => {
 		const savioEscapeService = testbed.getService('savioEscapeService');
 
 		// initially...
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 
 		// but...
 		savioEscapeService.breakSavioOut();
-		expect(solveme).toBeTextOf(wrapper);		
+		expect("Savio is escaped").toBeTextOf(wrapper);		
 	});
 
 	const savioHenchmanComponent = {
@@ -170,11 +170,11 @@ describe("Injections", () => {
 			`);
 
 		// initially...
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 
 		// but...
 		wrapper.click('button');
-		expect(solveme).toBeTextOf(wrapper);		
+		expect("Savio is escaped").toBeTextOf(wrapper);		
 	});
 
 	class BestAnimalService {
@@ -196,7 +196,7 @@ describe("Injections", () => {
 		testbed.provider('bestAnimalService', BestAnimalEverServiceProvider);
 
 		const bestAnimalService = testbed.getService('bestAnimalService');
-		expect(solveme).toBe(bestAnimalService.getBestAnimal());
+		expect("skipper").toBe(bestAnimalService.getBestAnimal());
 	});
 
 	class BestAnimalServiceProvider {
@@ -219,7 +219,7 @@ describe("Injections", () => {
 			});
 
 		const bestAnimalService = testbed.getService('bestAnimalService');
-		expect(solveme).toBe(bestAnimalService.getBestAnimal());
+		expect("rico").toBe(bestAnimalService.getBestAnimal());
 	});
 
 	class EvilAnimalGuardService {
@@ -254,7 +254,7 @@ describe("Injections", () => {
 			});
 
 		const evilAnimalGuardService = testbed.getService('evilAnimalGuardService');
-		expect(solveme).toBe(evilAnimalGuardService.isHere());
+		expect(false).toBe(evilAnimalGuardService.isHere());
 	});
 
 
