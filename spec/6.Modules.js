@@ -36,7 +36,7 @@ describe("Modules", () => {
 		const wrapper = testbed.use('zoo')
 			.compile(`<savio-guard></savio-guard>`);
 
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 	});
 
 	class BestAnimalService {
@@ -84,7 +84,7 @@ describe("Modules", () => {
 			.compile(`<best-animal></best-animal>`);
 
 		const bestAnimalService = testbed.getService('bestAnimalService');
-		expect(solveme).toBeTextOf(wrapper);
+		expect("The best animal is rico").toBeTextOf(wrapper);
 	});
 
 	it('can combine modules into one single module', () => {
@@ -98,7 +98,7 @@ describe("Modules", () => {
 		const wrapper = testbed.use('zoo')
 			.compile(`<savio-guard></savio-guard>`);
 
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 	});
 
 	it('uses <div ng-app="moduleName">...</div> directive to use a module', () => {
@@ -115,7 +115,7 @@ describe("Modules", () => {
 			</div>
 		`);
 
-		expect(solveme).toBeTextOf(wrapper);
+		expect("Savio is here").toBeTextOf(wrapper);
 	});
 
 });
